@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.ArrayList;
 
 @Data
-public class Library
+public final class Library
 {
   private ArrayList<Book> books;
 

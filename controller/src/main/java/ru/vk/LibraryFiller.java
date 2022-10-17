@@ -2,7 +2,7 @@ package ru.vk;
 
 import java.util.ArrayList;
 
-public class LibraryFiller
+public final class LibraryFiller
 {
   public ArrayList<Book> fill()
   {

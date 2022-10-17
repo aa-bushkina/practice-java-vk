@@ -1,17 +1,15 @@
 package ru.vk;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NonNull;
+import lombok.Value;
 
-@Data
+@Value
 @AllArgsConstructor
 public class Author
 {
-  @NonNull
-  private String surname;
-  private String firstname;
-  private String patronymic;
-  @NonNull
-  private String country;
+  @NonNull String surname;
+  String firstname;
+  String patronymic;
+  @NonNull String country;
 }

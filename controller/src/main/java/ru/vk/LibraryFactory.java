@@ -1,6 +1,6 @@
 package ru.vk;
 
-public class LibraryFactory
+public final class LibraryFactory
 {
   public Library createLibrary()
   {

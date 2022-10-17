@@ -3,19 +3,18 @@ package ru.vk;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NonNull;
+import lombok.Value;
 
-@Data
+@Value
 @AllArgsConstructor
 public class Book
 {
   @NonNull
   @Expose
-  private String name;
+  String name;
   @Expose
   @SerializedName("year of publication")
-  private int publicationYear;
-  @NonNull
-  private Author author;
+  int publicationYear;
+  @NonNull Author author;
 }
