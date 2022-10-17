@@ -1,10 +1,12 @@
 package ru.vk;
 
+import lombok.NonNull;
+
 import java.util.ArrayList;
 
 public final class LibraryFiller
 {
-  public ArrayList<Book> fill()
+  public @NonNull ArrayList<Book> fill()
   {
     ArrayList<Book> bookList = new ArrayList<>();
     Author author1 =

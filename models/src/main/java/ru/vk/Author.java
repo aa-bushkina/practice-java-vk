@@ -8,8 +8,11 @@ import lombok.Value;
 @AllArgsConstructor
 public class Author
 {
-  @NonNull String surname;
+  @NonNull
+  String surname;
   String firstname;
   String patronymic;
-  @NonNull String country;
+
+  @NonNull
+  String country;
 }

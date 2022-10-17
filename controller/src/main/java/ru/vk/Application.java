@@ -2,12 +2,13 @@ package ru.vk;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Scanner;
 
 public final class Application
 {
-  public static void main(String[] args)
+  public static void main(@NotNull String[] args)
   {
     LibraryFactory libFactory = new LibraryFactory();
     Library library = libFactory.createLibrary();

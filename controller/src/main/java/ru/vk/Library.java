@@ -1,6 +1,7 @@
 package ru.vk;
 
 import lombok.Data;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -9,7 +10,7 @@ public final class Library
 {
   private ArrayList<Book> books;
 
-  public void addBook(Book book)
+  public void addBook(final @NotNull Book book)
   {
     if (!books.contains(book))
     {
@@ -17,7 +18,7 @@ public final class Library
     }
   }
 
-  public void deleteBook(Book book)
+  public void deleteBook(final @NotNull Book book)
   {
     books.remove(book);
   }

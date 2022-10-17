@@ -13,8 +13,11 @@ public class Book
   @NonNull
   @Expose
   String name;
+
   @Expose
   @SerializedName("year of publication")
   int publicationYear;
-  @NonNull Author author;
+
+  @NonNull
+  Author author;
 }

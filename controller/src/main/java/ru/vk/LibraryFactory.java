@@ -1,8 +1,10 @@
 package ru.vk;
 
+import org.jetbrains.annotations.NotNull;
+
 public final class LibraryFactory
 {
-  public Library createLibrary()
+  public @NotNull Library createLibrary()
   {
     Library library = new Library();
     LibraryFiller libraryFiller = new LibraryFiller();
