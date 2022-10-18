@@ -9,10 +9,10 @@ import lombok.Value;
 public class Author
 {
   @NonNull
-  String surname;
-  String firstname;
-  String patronymic;
+  final String surname;
+  final String firstname;
+  final String patronymic;
 
   @NonNull
-  String country;
+  final String country;
 }

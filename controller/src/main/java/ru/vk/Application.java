@@ -10,8 +10,8 @@ public final class Application
 {
   public static void main(@NotNull String[] args)
   {
-    LibraryFactory libFactory = new LibraryFactory();
-    Library library = libFactory.createLibrary();
+    final LibraryFactory libFactory = new LibraryFactory();
+    final Library library = libFactory.createLibrary();
 
     boolean isAuthorExist = false;
     while (true)
@@ -20,7 +20,7 @@ public final class Application
       {
         return;
       }
-      String authorSurname = readSurnameFromInput();
+      final String authorSurname = readSurnameFromInput();
       if (authorSurname.isEmpty())
       {
         continue;
@@ -53,9 +53,9 @@ public final class Application
   public static String readSurnameFromInput()
   {
     System.out.println("Введите фамилию автора:");
-    Scanner in = new Scanner(System.in);
-    String author = in.nextLine();
-    author = author.replaceAll(" ", "");
+    final Scanner in = new Scanner(System.in);
+    final String str = in.nextLine();
+    final String author = str.replaceAll(" ", "");
     return author;
   }
 }
