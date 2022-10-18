@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public final class Application
@@ -53,9 +54,14 @@ public final class Application
   public static String readSurnameFromInput()
   {
     System.out.println("Введите фамилию автора:");
-    final Scanner in = new Scanner(System.in);
-    final String str = in.nextLine();
-    final String author = str.replaceAll(" ", "");
-    return author;
+    try (Scanner in = new Scanner(System.in))
+    {
+      final String str = in.nextLine();
+      return str.replaceAll(" ", "");
+    } catch (IllegalStateException | NoSuchElementException e)
+    {
+      e.printStackTrace();
+    }
+    return null;
   }
 }
