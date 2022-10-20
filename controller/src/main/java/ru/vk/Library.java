@@ -3,12 +3,12 @@ package ru.vk;
 import lombok.Data;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public final class Library
 {
-  private ArrayList<Book> books;
+  private List<Book> books;
 
   public void addBook(final @NotNull Book book)
   {
