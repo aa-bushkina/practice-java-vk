@@ -3,10 +3,6 @@ plugins {
     id("io.freefair.lombok") version "6.5.1"
 }
 
-repositories {
-    mavenCentral()
-}
-
 allprojects {
 
     group = "ru.vk"
@@ -35,6 +31,10 @@ allprojects {
         testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
         implementation("com.intellij:annotations:12.0")
         implementation("com.google.code.gson:gson:2.9.1")
+    }
+
+    repositories {
+        mavenCentral()
     }
 }
 

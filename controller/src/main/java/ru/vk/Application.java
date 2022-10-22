@@ -27,6 +27,11 @@ public final class Application
         continue;
       }
 
+      Gson gson = new GsonBuilder()
+        .excludeFieldsWithoutExposeAnnotation()
+        .setPrettyPrinting()
+        .create();
+
       for (Book book : library.getBooks())
       {
         if (authorSurname.equalsIgnoreCase(book.getAuthor().getSurname()))
@@ -36,10 +41,6 @@ public final class Application
             isAuthorExist = true;
             System.out.println("Книги автора: " + authorSurname);
           }
-          Gson gson = new GsonBuilder()
-            .excludeFieldsWithoutExposeAnnotation()
-            .setPrettyPrinting()
-            .create();
           String json = gson.toJson(book);
           System.out.println(json);
         }
@@ -54,14 +55,8 @@ public final class Application
   public static String readSurnameFromInput()
   {
     System.out.println("Введите фамилию автора:");
-    try (Scanner in = new Scanner(System.in))
-    {
-      final String str = in.nextLine();
-      return str.replaceAll(" ", "");
-    } catch (IllegalStateException | NoSuchElementException e)
-    {
-      e.printStackTrace();
-    }
-    return null;
+    Scanner in = new Scanner(System.in);
+    final String str = in.nextLine();
+    return str.replaceAll(" ", "");
   }
 }
