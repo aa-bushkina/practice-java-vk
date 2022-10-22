@@ -14,6 +14,11 @@ public final class Application
     final LibraryFactory libFactory = new LibraryFactory();
     final Library library = libFactory.createLibrary();
 
+    Gson gson = new GsonBuilder()
+      .excludeFieldsWithoutExposeAnnotation()
+      .setPrettyPrinting()
+      .create();
+
     boolean isAuthorExist = false;
     while (true)
     {
@@ -26,11 +31,6 @@ public final class Application
       {
         continue;
       }
-
-      Gson gson = new GsonBuilder()
-        .excludeFieldsWithoutExposeAnnotation()
-        .setPrettyPrinting()
-        .create();
 
       for (Book book : library.getBooks())
       {
