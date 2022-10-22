@@ -19,13 +19,11 @@ public final class Application
       .setPrettyPrinting()
       .create();
 
-    boolean isAuthorExist = false;
+    boolean isAuthorExist;
+    System.out.println("Нажмите Ctrl+D для выхода");
     while (true)
     {
-      if (isAuthorExist)
-      {
-        return;
-      }
+      isAuthorExist = false;
       final String authorSurname = readSurnameFromInput();
       if (authorSurname.isEmpty())
       {
@@ -38,17 +36,18 @@ public final class Application
         {
           if (!isAuthorExist)
           {
-            isAuthorExist = true;
             System.out.println("Книги автора: " + authorSurname);
           }
+          isAuthorExist = true;
           String json = gson.toJson(book);
           System.out.println(json);
         }
       }
       if (!isAuthorExist)
       {
-        System.out.println("В библиотеке нет автора: " + authorSurname + "\n");
+        System.out.println("В библиотеке нет автора: " + authorSurname);
       }
+      System.out.println('\n');
     }
   }
 
