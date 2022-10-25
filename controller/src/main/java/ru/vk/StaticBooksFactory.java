@@ -4,9 +4,9 @@ import lombok.NonNull;
 
 import java.util.ArrayList;
 
-public final class LibraryFiller
+public final class StaticBooksFactory implements BooksFactory
 {
-  public @NonNull ArrayList<Book> fill()
+  public @NonNull ArrayList<Book> books()
   {
     ArrayList<Book> bookList = new ArrayList<>();
     Author author1 =
