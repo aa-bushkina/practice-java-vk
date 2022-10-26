@@ -1,14 +1,16 @@
 package ru.vk;
 
+import com.google.inject.Inject;
 import org.jetbrains.annotations.NotNull;
+import ru.vk.books.BooksFactory;
+import ru.vk.books.FileBooksFactory;
 
-public final class LibraryFactory
+import javax.inject.Named;
+
+public class LibraryFactory
 {
-  public @NotNull Library createLibrary()
+  Library library(final int capacity, @NotNull final String filename)
   {
-    final Library library = new Library();
-    LibraryFiller libraryFiller = new LibraryFiller();
-    library.setBooks(libraryFiller.fill());
-    return library;
+    return new Library(new FileBooksFactory(filename), capacity);
   }
 }

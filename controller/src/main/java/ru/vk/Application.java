@@ -11,17 +11,12 @@ public final class Application
 {
   public static void main(@NotNull String[] args)
   {
-    String filename = args[0];
-    int capacity = Integer.parseInt(args[1]);
-
-    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    final String filename = args[0];
+    final int capacity = Integer.parseInt(args[1]);
 
     Injector injector = Guice.createInjector(new BooksModule());
     Library library = injector.getInstance(LibraryFactory.class).library(capacity, filename);
 
-    for (Book book : library.getBooks())
-    {
-      System.out.println(gson.toJson(book));
-    }
+    library.printAllBooks();
   }
 }
