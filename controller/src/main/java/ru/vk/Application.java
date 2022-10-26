@@ -14,10 +14,7 @@ public final class Application
     String filename = args[0];
     int capacity = Integer.parseInt(args[1]);
 
-    Gson gson = new GsonBuilder()
-      .excludeFieldsWithoutExposeAnnotation()
-      .setPrettyPrinting()
-      .create();
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     Injector injector = Guice.createInjector(new BooksModule());
     Library library = injector.getInstance(LibraryFactory.class).library(capacity, filename);

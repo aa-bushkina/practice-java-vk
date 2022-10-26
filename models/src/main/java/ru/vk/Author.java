@@ -10,11 +10,7 @@ import org.jetbrains.annotations.Nullable;
 public class Author
 {
   @NonNull
-  final String surname;
+  final String name;
   @Nullable
-  final String firstname;
-  @Nullable
-  final String patronymic;
-  @NonNull
   final String country;
 }

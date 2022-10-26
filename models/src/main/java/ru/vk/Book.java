@@ -11,12 +11,7 @@ import lombok.Value;
 public class Book
 {
   @NonNull
-  @Expose
   final String name;
-
-  @Expose
-  @SerializedName("year of publication")
-  final int publicationYear;
 
   @NonNull
   final Author author;
