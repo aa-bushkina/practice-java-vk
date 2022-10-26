@@ -1,7 +1,5 @@
 package ru.vk;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.jetbrains.annotations.NotNull;

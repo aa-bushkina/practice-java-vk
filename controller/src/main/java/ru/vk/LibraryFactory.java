@@ -1,11 +1,7 @@
 package ru.vk;
 
-import com.google.inject.Inject;
 import org.jetbrains.annotations.NotNull;
-import ru.vk.books.BooksFactory;
 import ru.vk.books.FileBooksFactory;
-
-import javax.inject.Named;
 
 public class LibraryFactory
 {
