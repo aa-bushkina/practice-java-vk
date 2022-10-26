@@ -1,6 +1,8 @@
-package ru.vk;
+package ru.vk.books;
 
 import lombok.NonNull;
+import ru.vk.Author;
+import ru.vk.Book;
 
 import java.util.ArrayList;
 
