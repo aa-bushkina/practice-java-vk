@@ -11,19 +11,16 @@ import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 public final class Library
 {
   private List<Book> books;
+  private final int capacity;
   @NotNull
-  private BooksFactory booksFactory;
-  private int capacity;
   private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
   @Inject
   Library(@NotNull final @Named("file") BooksFactory booksFactory, final int capacity)
   {
-    this.booksFactory = booksFactory;
     this.capacity = capacity;
     books = new ArrayList<>(capacity);
     if (booksFactory.books().size() > capacity)
