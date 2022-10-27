@@ -7,8 +7,5 @@ import java.util.Collection;
 
 public interface BooksFactory
 {
-  Collection<Book> books();
-
-  void setFileName(@NotNull String fileName);
-
+  Collection<Book> books(@NotNull final String filename);
 }

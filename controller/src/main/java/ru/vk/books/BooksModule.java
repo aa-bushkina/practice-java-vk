@@ -9,6 +9,5 @@ public class BooksModule extends AbstractModule
   protected void configure()
   {
     bind(BooksFactory.class).annotatedWith(Names.named("file")).to(FileBooksFactory.class);
-    bind(BooksFactory.class).annotatedWith(Names.named("static")).to(StaticBooksFactory.class);
   }
 }

@@ -20,18 +20,18 @@ public final class LibraryImpl implements Library
   private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
   @AssistedInject
-  LibraryImpl(@NotNull @Named("file") BooksFactory booksFactory,
+  LibraryImpl(@NotNull @Named("file") BooksFactory factory,
               @Assisted final int capacity,
               @Assisted @NotNull final String filename)
   {
-    booksFactory.setFileName(filename);
+    final ArrayList<Book> tmpBooks = (ArrayList<Book>) factory.books(filename);
     this.capacity = capacity;
     books = new ArrayList<>(capacity);
-    if (booksFactory.books().size() > capacity)
+    if (tmpBooks.size() > capacity)
     {
       throw new RuntimeException("The allowed container size has been exceeded");
     }
-    books = (ArrayList<Book>) booksFactory.books();
+    books = tmpBooks;
   }
 
   public Book takeBook(final int cellNum)
