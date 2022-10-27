@@ -1,6 +1,7 @@
 package ru.vk.books;
 
 import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 import ru.vk.Author;
 import ru.vk.Book;
 
@@ -27,5 +28,11 @@ public final class StaticBooksFactory implements BooksFactory
     bookList.add(new Book("Призрак оперы", author3));
 
     return bookList;
+  }
+
+  @Override
+  public void setFileName(@NotNull String fileName)
+  {
+
   }
 }

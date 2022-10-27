@@ -1,26 +1,30 @@
-package ru.vk;
+package ru.vk.library;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.inject.Inject;
-import lombok.Data;
+import com.google.inject.assistedinject.Assisted;
+import com.google.inject.assistedinject.AssistedInject;
 import org.jetbrains.annotations.NotNull;
+import ru.vk.Book;
 import ru.vk.books.BooksFactory;
 
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Library
+public final class LibraryImpl implements Library
 {
   private List<Book> books;
   private final int capacity;
   @NotNull
   private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-  @Inject
-  Library(@NotNull final @Named("file") BooksFactory booksFactory, final int capacity)
+  @AssistedInject
+  LibraryImpl(@NotNull @Named("file") BooksFactory booksFactory,
+              @Assisted final int capacity,
+              @Assisted @NotNull final String filename)
   {
+    booksFactory.setFileName(filename);
     this.capacity = capacity;
     books = new ArrayList<>(capacity);
     if (booksFactory.books().size() > capacity)
