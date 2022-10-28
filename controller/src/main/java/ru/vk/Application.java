@@ -12,11 +12,11 @@ public final class Application
 {
   public static void main(@NotNull String[] args)
   {
-    final String filename = args[0];
+    final String filePath = args[0];
     final int capacity = Integer.parseInt(args[1]);
 
     Injector injector = Guice.createInjector(new BooksModule(), new LibraryModule());
-    LibraryImpl library = injector.getInstance(LibraryFactory.class).library(capacity, filename);
+    LibraryImpl library = injector.getInstance(LibraryFactory.class).library(capacity, filePath);
     library.printAllBooks();
   }
 }

@@ -23,9 +23,9 @@ public final class LibraryImpl implements Library
   @AssistedInject
   LibraryImpl(@NotNull @Named("file") BooksFactory factory,
               @Assisted final int capacity,
-              @Assisted @NotNull final String filename)
+              @Assisted @NotNull final String filePath)
   {
-    final ArrayList<Book> tmpBooks = (ArrayList<Book>) factory.books(filename);
+    final ArrayList<Book> tmpBooks = (ArrayList<Book>) factory.books(filePath);
     this.capacity = capacity;
     books = new ArrayList<>(capacity);
     if (tmpBooks.size() > capacity)

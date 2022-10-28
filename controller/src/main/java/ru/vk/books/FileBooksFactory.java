@@ -19,11 +19,11 @@ public final class FileBooksFactory implements BooksFactory
   }.getType();
 
   @Override
-  public ArrayList<Book> books(@NotNull final String filename)
+  public ArrayList<Book> books(@NotNull final String filePath)
   {
     try
     {
-      return new Gson().fromJson(new BufferedReader(new FileReader(filename)), listBooksType);
+      return new Gson().fromJson(new BufferedReader(new FileReader(filePath)), listBooksType);
     } catch (FileNotFoundException e)
     {
       throw new IllegalStateException(e);
