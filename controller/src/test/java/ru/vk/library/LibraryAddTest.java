@@ -6,8 +6,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import ru.vk.Book;
-import ru.vk.books.FileBooksFactory;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LibraryAddTest extends LibraryTest
@@ -17,27 +18,28 @@ public class LibraryAddTest extends LibraryTest
   private LibraryFactory libraryFactory;
   @NotNull
   private final String filePath = "../controller/src/test/resources/books.txt";
+  final int capacity = 2;
 
   @Test
   @DisplayName("Добавление книги в первую пустую ячейку")
   void addBookToFirstEmptyCellTest()
   {
-    LibraryImpl library = libraryFactory.library(3, filePath);
+    final LibraryImpl library = libraryFactory.library(capacity, filePath);
     library.takeBook(0);
-    //library.addBook(Mockito.mock(Book.class));
-    assertNotEquals(library.takeBook(0), null);
+    library.takeBook(1);
+    library.addBook(Mockito.mock(Book.class));
+    assertThat(library.getBooks().get(0), is(not(equalTo(null))));
+    assertThat(library.getBooks().get(1), is(equalTo(null)));
   }
 
   @Test
   @DisplayName("Добавление книги в заполненную библиотеку")
   void addBookToFullLibraryTest()
   {
-    LibraryImpl library = libraryFactory.library(3, filePath);
-    library.addBook(Mockito.mock(Book.class));
-    Throwable thrown = assertThrows(RuntimeException.class, () ->
-    {
-      library.addBook(Mockito.mock(Book.class));
-    });
-    assertEquals("The library is full", thrown.getMessage());
+    final String expectedMsg = "The library is full";
+    final LibraryImpl library = libraryFactory.library(capacity, filePath);
+    final Throwable thrown = assertThrows(RuntimeException.class, () ->
+      library.addBook(Mockito.mock(Book.class)));
+    assertThat(expectedMsg, is(equalTo(thrown.getMessage())));
   }
 }
