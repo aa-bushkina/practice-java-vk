@@ -19,15 +19,15 @@ public class LibraryCreateTest extends LibraryTest
   @NotNull
   @Inject
   FileBooksFactory fileBooksFactory;
+  final int capacity = 3;
+  final int capacityLess = 1;
 
   @Test
   @DisplayName("Создание библиотеки с вместимостью меньше, чем количество книг, возвращаемых фабрикой")
   void exceedingCapacityOfLibraryTest() throws RuntimeException
   {
     Throwable thrown = assertThrows(RuntimeException.class, () ->
-    {
-      libraryFactory.library(1, filePath);
-    });
+      libraryFactory.library(capacityLess, filePath));
     assertEquals("The allowed container size has been exceeded", thrown.getMessage());
   }
 
@@ -35,9 +35,7 @@ public class LibraryCreateTest extends LibraryTest
   @DisplayName("При создании библиотеки все книги расставлены по ячейкам в порядке как возвращаются фабрикой книг")
   void fillCellsOfLibraryTest()
   {
-    var a = fileBooksFactory.books(filePath);
-    var b = libraryFactory.library(3, filePath).getBooks();
-    assertEquals(a, b);
+    assertEquals(fileBooksFactory.books(filePath), libraryFactory.library(capacity, filePath).getBooks());
   }
 
 }
