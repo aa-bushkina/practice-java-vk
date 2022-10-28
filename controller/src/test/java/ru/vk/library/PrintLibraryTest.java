@@ -25,6 +25,7 @@ class PrintLibraryTest extends LibraryTest
   private final String filePath = "../controller/src/test/resources/books.txt";
   final int capacity = 3;
   final int numBooksInFile = 2;
+  final int numOfPrintlnInMethod = 2;
 
   @Test
   @DisplayName("Вывод информации о всех книгах")
@@ -36,7 +37,7 @@ class PrintLibraryTest extends LibraryTest
 
     libraryFactory.library(capacity, filePath).printAllBooks();
 
-    verify(stream, times(numBooksInFile * 2)).println(captor.capture());
+    verify(stream, times(numBooksInFile * numOfPrintlnInMethod)).println(captor.capture());
 
     assertEquals(makeExpectedList(), captor.getAllValues());
   }
