@@ -6,7 +6,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.vk.books.FileBooksFactory;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LibraryCreateTest extends LibraryTest
@@ -26,16 +28,17 @@ public class LibraryCreateTest extends LibraryTest
   @DisplayName("Создание библиотеки с вместимостью меньше, чем количество книг, возвращаемых фабрикой")
   void exceedingCapacityOfLibraryTest() throws RuntimeException
   {
-    Throwable thrown = assertThrows(RuntimeException.class, () ->
+    final String expectedMsg = "The allowed container size has been exceeded";
+    final Throwable thrown = assertThrows(RuntimeException.class, () ->
       libraryFactory.library(capacityLess, filePath));
-    assertEquals("The allowed container size has been exceeded", thrown.getMessage());
+    assertThat(expectedMsg, is(equalTo(thrown.getMessage())));
   }
 
   @Test
   @DisplayName("При создании библиотеки все книги расставлены по ячейкам в порядке как возвращаются фабрикой книг")
   void fillCellsOfLibraryTest()
   {
-    assertEquals(fileBooksFactory.books(filePath), libraryFactory.library(capacity, filePath).getBooks());
+    assertThat(fileBooksFactory.books(filePath),
+      is(equalTo(libraryFactory.library(capacity, filePath).getBooks())));
   }
-
 }

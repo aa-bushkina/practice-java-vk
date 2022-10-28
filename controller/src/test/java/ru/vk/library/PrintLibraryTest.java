@@ -31,8 +31,8 @@ class PrintLibraryTest extends LibraryTest
   @DisplayName("Вывод информации о всех книгах")
   void printAllBooksTest()
   {
-    PrintStream stream = mock(PrintStream.class);
-    ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+    final PrintStream stream = mock(PrintStream.class);
+    final ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
     System.setOut(stream);
 
     libraryFactory.library(capacity, filePath).printAllBooks();
