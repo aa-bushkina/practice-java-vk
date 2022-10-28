@@ -21,7 +21,7 @@ public class LibraryCreateTest extends LibraryTest
   @NotNull
   @Inject
   FileBooksFactory fileBooksFactory;
-  final int capacity = 3;
+  final int capacity = 2;
   final int capacityLess = 1;
 
   @Test

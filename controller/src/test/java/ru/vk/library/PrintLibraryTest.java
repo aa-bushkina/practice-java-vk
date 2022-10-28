@@ -23,7 +23,7 @@ class PrintLibraryTest extends LibraryTest
   private LibraryFactory libraryFactory;
   @NotNull
   private final String filePath = "../controller/src/test/resources/books.txt";
-  final int capacity = 3;
+  final int capacity = 2;
   final int numBooksInFile = 2;
   final int numOfPrintlnInMethod = 2;
 

@@ -26,7 +26,7 @@ public class LibraryGetTest extends LibraryTest
   private LibraryFactory libraryFactory;
   @NotNull
   private final String filePath = "../controller/src/test/resources/books.txt";
-  final int capacity = 3;
+  final int capacity = 2;
   final int cellNum = 0;
 
   @Test
