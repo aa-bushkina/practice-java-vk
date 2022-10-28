@@ -15,8 +15,8 @@ public final class Application
     final String filePath = args[0];
     final int capacity = Integer.parseInt(args[1]);
 
-    Injector injector = Guice.createInjector(new BooksModule(), new LibraryModule());
-    LibraryImpl library = injector.getInstance(LibraryFactory.class).library(capacity, filePath);
+    final Injector injector = Guice.createInjector(new BooksModule(), new LibraryModule());
+    final LibraryImpl library = injector.getInstance(LibraryFactory.class).library(capacity, filePath);
     library.printAllBooks();
   }
 }
