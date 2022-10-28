@@ -23,6 +23,8 @@ class PrintLibraryTest extends LibraryTest
   private LibraryFactory libraryFactory;
   @NotNull
   private final String filePath = "../controller/src/test/resources/books.txt";
+  final int capacity = 3;
+  final int numBooksInFile = 2;
 
   @Test
   @DisplayName("Вывод информации о всех книгах")
@@ -32,9 +34,9 @@ class PrintLibraryTest extends LibraryTest
     ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
     System.setOut(stream);
 
-    libraryFactory.library(3, filePath).printAllBooks();
+    libraryFactory.library(capacity, filePath).printAllBooks();
 
-    verify(stream, times(4)).println(captor.capture());
+    verify(stream, times(numBooksInFile * 2)).println(captor.capture());
 
     assertEquals(makeExpectedList(), captor.getAllValues());
   }
