@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import ru.vk.Book;
 import ru.vk.books.BooksFactory;
@@ -11,7 +12,7 @@ import ru.vk.books.BooksFactory;
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
-
+@Getter
 public final class LibraryImpl implements Library
 {
   private List<Book> books;

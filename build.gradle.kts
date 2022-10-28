@@ -27,14 +27,14 @@ allprojects {
     }
 
     dependencies {
-        testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
         testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
         implementation("com.intellij:annotations:12.0")
-        implementation("com.google.code.gson:gson:2.9.1")
+        implementation("com.google.code.gson:gson:2.10")
         implementation("com.google.inject:guice:5.1.0")
         testImplementation("org.mockito:mockito-core:4.8.1")
         testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.1")
         implementation("com.google.inject.extensions:guice-assistedinject:5.1.0")
+        testImplementation("org.hamcrest:hamcrest-all:1.3")
     }
 
     repositories {
