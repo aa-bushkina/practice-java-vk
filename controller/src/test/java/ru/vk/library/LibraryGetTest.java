@@ -5,16 +5,19 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
 import ru.vk.Book;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 public class LibraryGetTest extends LibraryTest
@@ -25,20 +28,51 @@ public class LibraryGetTest extends LibraryTest
   @NotNull
   private final String filePath = "../controller/src/test/resources/books.txt";
   final int capacity = 3;
-  final int cellNum = 3;
+  final int cellNum = 0;
+  final int numOfPrintlnInMethod = 2;
 
   @Test
   @DisplayName("Вывод информации при взятии книги")
   void getBookFromCellAndPrintTest()
   {
-    PrintStream stream = mock(PrintStream.class);
-    ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+    final PrintStream stream = mock(PrintStream.class);
+    final ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
     System.setOut(stream);
 
     libraryFactory.library(capacity, filePath).takeBook(cellNum);
 
+    verify(stream, times(numOfPrintlnInMethod)).println(captor.capture());
+    assertEquals(makeExpectedList(), captor.getAllValues());
+  }
 
-    verify(stream, times(2)).println(captor.capture());
+  @Test
+  @DisplayName("Взятие книги из пустой ячейки")
+  void getBookFromEmptyCellTest()
+  {
+    final LibraryImpl library = libraryFactory.library(capacity, filePath);
+    library.takeBook(cellNum);
+
+    final Throwable thrown = assertThrows(RuntimeException.class, () ->
+      library.takeBook(cellNum));
+
+    assertEquals("The cell is empty", thrown.getMessage());
+  }
+
+  @Test
+  @DisplayName("Взятие книги из ячейки")
+  void getCorrectBookFromCellTest()
+  {
+    final Book bookExpected = Mockito.mock(Book.class);
+    when(bookExpected.getName()).thenReturn("Book 0");
+
+    final LibraryImpl library = libraryFactory.library(capacity, filePath);
+    final Book book = library.takeBook(cellNum);
+
+    assertThat(bookExpected.getName(), is(equalTo(book.getName())));
+  }
+
+  List<String> makeExpectedList()
+  {
     List<String> list = new ArrayList<>();
     list.add("cell number: 0");
     list.add("""
@@ -48,27 +82,6 @@ public class LibraryGetTest extends LibraryTest
           "name": "Author0"
         }
       }""");
-    assertEquals(list, captor.getAllValues());
-  }
-
-  @Test
-  @DisplayName("Взятие книги из пустой ячейки")
-  void getBookFromEmptyCellTest()
-  {
-    LibraryImpl library = libraryFactory.library(capacity, filePath);
-    library.takeBook(cellNum);
-    Throwable thrown = assertThrows(RuntimeException.class, () ->
-      library.takeBook(cellNum));
-    assertEquals("The cell is empty", thrown.getMessage());
-  }
-
-  @Test
-  @DisplayName("Взятие книги из ячейки")
-  void getCorrectBookFromCellTest()
-  {
-    //Book bookExp = Mockito.mock(Book.class);
-    LibraryImpl library = libraryFactory.library(capacity, filePath);
-    Book book = library.takeBook(cellNum);
-    // assertEquals(bookExp, book);
+    return list;
   }
 }
