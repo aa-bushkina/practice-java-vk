@@ -1,10 +1,10 @@
 package ru.vk;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NonNull;
-import lombok.Value;
 
-@Value
+@Data
 @AllArgsConstructor
 public class Book
 {
