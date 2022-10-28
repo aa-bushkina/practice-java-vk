@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import ru.vk.Book;
-import ru.vk.books.FileBooksFactory;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -25,6 +24,8 @@ public class LibraryGetTest extends LibraryTest
   private LibraryFactory libraryFactory;
   @NotNull
   private final String filePath = "../controller/src/test/resources/books.txt";
+  final int capacity = 3;
+  final int cellNum = 3;
 
   @Test
   @DisplayName("Вывод информации при взятии книги")
@@ -34,7 +35,7 @@ public class LibraryGetTest extends LibraryTest
     ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
     System.setOut(stream);
 
-    libraryFactory.library(3, filePath).takeBook(0);
+    libraryFactory.library(capacity, filePath).takeBook(cellNum);
 
 
     verify(stream, times(2)).println(captor.capture());
@@ -54,12 +55,10 @@ public class LibraryGetTest extends LibraryTest
   @DisplayName("Взятие книги из пустой ячейки")
   void getBookFromEmptyCellTest()
   {
-    LibraryImpl library = libraryFactory.library(3, filePath);
-    library.takeBook(0);
+    LibraryImpl library = libraryFactory.library(capacity, filePath);
+    library.takeBook(cellNum);
     Throwable thrown = assertThrows(RuntimeException.class, () ->
-    {
-      library.takeBook(0);
-    });
+      library.takeBook(cellNum));
     assertEquals("The cell is empty", thrown.getMessage());
   }
 
@@ -68,8 +67,8 @@ public class LibraryGetTest extends LibraryTest
   void getCorrectBookFromCellTest()
   {
     //Book bookExp = Mockito.mock(Book.class);
-    LibraryImpl library = libraryFactory.library(3, filePath);
-    Book book = library.takeBook(0);
+    LibraryImpl library = libraryFactory.library(capacity, filePath);
+    Book book = library.takeBook(cellNum);
     // assertEquals(bookExp, book);
   }
 }
