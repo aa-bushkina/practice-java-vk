@@ -13,7 +13,5 @@ public interface Library
   void printBook(@NotNull final Book book);
 
   void printAllBooks();
-
-  List<Book> getBooksByAuthor(@NotNull final String authorSurname);
 }
 

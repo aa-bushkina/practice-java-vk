@@ -12,6 +12,7 @@ import ru.vk.books.BooksFactory;
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
+
 @Getter
 public final class LibraryImpl implements Library
 {
@@ -79,18 +80,5 @@ public final class LibraryImpl implements Library
       printBook(book);
     }
     System.out.println();
-  }
-
-  public List<Book> getBooksByAuthor(@NotNull final String authorSurname)
-  {
-    List<Book> booksByAuthor = new ArrayList<Book>();
-    for (Book book : books)
-    {
-      if (authorSurname.equalsIgnoreCase(book.getAuthor().getName()))
-      {
-        booksByAuthor.add(book);
-      }
-    }
-    return booksByAuthor;
   }
 }
