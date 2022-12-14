@@ -1,53 +1,22 @@
 package ru.vk;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
-import java.util.Scanner;
+import ru.vk.books.BooksModule;
+import ru.vk.library.LibraryImpl;
+import ru.vk.library.LibraryFactory;
+import ru.vk.library.LibraryModule;
 
 public final class Application
 {
   public static void main(@NotNull String[] args)
   {
-    final LibraryFactory libFactory = new LibraryFactory();
-    final Library library = libFactory.createLibrary();
+    final String filePath = args[0];
+    final int capacity = Integer.parseInt(args[1]);
 
-    Gson gson = new GsonBuilder()
-      .excludeFieldsWithoutExposeAnnotation()
-      .setPrettyPrinting()
-      .create();
-
-    System.out.println("Нажмите Ctrl+D для выхода");
-    while (true)
-    {
-      final String authorSurname = readSurnameFromInput();
-      if (authorSurname.isEmpty())
-      {
-        continue;
-      }
-      List<Book> booksByAuthor = library.getBooksByAuthor(authorSurname);
-      if (booksByAuthor.isEmpty())
-      {
-        System.out.println("В библиотеке нет книг автора: " + authorSurname + "\n");
-        continue;
-      }
-      System.out.println("Книги автора: " + authorSurname);
-
-      for (Book book : booksByAuthor)
-      {
-        System.out.println(gson.toJson(book));
-      }
-      System.out.println();
-    }
-  }
-
-  public static String readSurnameFromInput()
-  {
-    System.out.println("Введите фамилию автора:");
-    Scanner in = new Scanner(System.in);
-    final String str = in.nextLine();
-    return str.replaceAll(" ", "");
+    final Injector injector = Guice.createInjector(new BooksModule(), new LibraryModule());
+    final LibraryImpl library = injector.getInstance(LibraryFactory.class).library(capacity, filePath);
+    library.printAllBooks();
   }
 }
